@@ -1,7 +1,15 @@
-import React from "react";
+import React from 'react';
+import Global from './styles/global';
+
+import Sidebar from './components/Sidebar';
 
 function App() {
-  return <div>Hello</div>;
+  return (
+    <>
+      <Global />
+      <Sidebar />
+    </>
+  );
 }
 
 export default App;
