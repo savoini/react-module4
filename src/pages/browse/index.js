@@ -8,7 +8,7 @@ const Browse = () => (
   <Container>
     <Title>Navegar</Title>
     <List>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
           alt="Album cover"
@@ -17,7 +17,7 @@ const Browse = () => (
         <p>Relaxe enquanto você programe</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
           alt="Album cover"
@@ -26,7 +26,7 @@ const Browse = () => (
         <p>Relaxe enquanto você programe</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
           alt="Album cover"
@@ -35,7 +35,7 @@ const Browse = () => (
         <p>Relaxe enquanto você programe</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
           alt="Album cover"

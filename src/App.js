@@ -1,5 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import './config/reactotron';
+import store from './store';
+
 import Global from './styles/global';
 import { Wrapper, Container, Content } from './styles/components';
 
@@ -11,19 +16,21 @@ import Routes from './routes';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Wrapper>
-        <Global />
-        <Container>
-          <Sidebar />
-          <Content>
-            <Header />
-            <Routes />
-          </Content>
-        </Container>
-        <Player />
-      </Wrapper>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Wrapper>
+          <Global />
+          <Container>
+            <Sidebar />
+            <Content>
+              <Header />
+              <Routes />
+            </Content>
+          </Container>
+          <Player />
+        </Wrapper>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
