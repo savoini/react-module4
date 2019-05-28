@@ -1,50 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as PlaylistsActions } from '../../store/ducks/playlists';
 
 import {
   Container, Title, List, Playlist,
 } from './styles';
 
-const Browse = () => (
-  <Container>
-    <Title>Navegar</Title>
-    <List>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
-          alt="Album cover"
-        />
-        <strong>Rock</strong>
-        <p>Relaxe enquanto você programe</p>
-      </Playlist>
+import Loading from '../../components/Loading';
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
-          alt="Album cover"
-        />
-        <strong>Rock</strong>
-        <p>Relaxe enquanto você programe</p>
-      </Playlist>
+class Browse extends Component {
+  static propTypes = {
+    getPlayListsRequest: PropTypes.func.isRequired,
+    playlists: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          title: PropTypes.string,
+        }),
+      ),
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
+  };
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
-          alt="Album cover"
-        />
-        <strong>Rock</strong>
-        <p>Relaxe enquanto você programe</p>
-      </Playlist>
+  componentDidMount() {
+    const { getPlayListsRequest } = this.props;
+    getPlayListsRequest();
+  }
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930"
-          alt="Album cover"
-        />
-        <strong>Rock</strong>
-        <p>Relaxe enquanto você programe</p>
-      </Playlist>
-    </List>
-  </Container>
-);
+  render() {
+    const { playlists } = this.props;
+    return (
+      <Container>
+        <Title>
+          Navegar
+          {playlists.loading && <Loading />}
+        </Title>
 
-export default Browse;
+        <List>
+          {playlists.data.map(playlist => (
+            <Playlist to={`/playlists/${playlist.id}`} key={playlist.id}>
+              <img src={playlist.thumbnail} alt="Album cover" />
+              <strong>{playlist.title}</strong>
+              <p>{playlist.description}</p>
+            </Playlist>
+          ))}
+        </List>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  playlists: state.playlists,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(PlaylistsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Browse);
