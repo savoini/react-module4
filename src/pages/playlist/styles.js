@@ -81,12 +81,16 @@ export const SongList = styled.table`
       text-align: right;
     }
   }
+`;
 
-  tbody td {
+export const SongItem = styled.tr`
+  td {
     border-top: 1px solid #282828;
     line-height: 40px;
     padding: 0 10px;
     font-size: 13px;
+    background: ${props => (props.selected ? '#282828' : 'transparent')};
+    color: ${props => (props.playing ? '#1ed760' : '#b3b3b3')};
 
     &:first-child {
       width: 80px;
@@ -98,7 +102,7 @@ export const SongList = styled.table`
     }
   }
 
-  tbody tr:hover td {
+  &:hover td {
     background: #282828;
   }
 `;
