@@ -74,6 +74,7 @@ export const Time = styled.div`
   span {
     font-size: 11px;
     color: #b3b3b3;
+    width: 30px;
   }
 `;
 
