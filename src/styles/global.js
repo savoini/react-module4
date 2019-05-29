@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
         text-rendering: optimizeLegibility !important;
         -webkit-font-smoothing: antialiased !important;
     }
+
+    button {
+      cursor: pointer;
+    }
 `;
 
 export default GlobalStyle;
