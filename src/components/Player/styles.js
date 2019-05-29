@@ -61,6 +61,8 @@ export const Controls = styled.div`
     background: transparent;
     border: 0;
     margin: 0 15px;
+    outline-offset: 0px;
+    outline: 0px auto -webkit-focus-ring-color;
   }
 `;
 

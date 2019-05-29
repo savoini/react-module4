@@ -5,7 +5,7 @@ import Sound from 'react-sound';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Creators as PlayerActions } from ''
+import { Creators as PlayerActions } from '../../store/ducks/player';
 
 import {
   Container, Current, Volume, Progress, Controls, Time, ProgressSlider,
@@ -18,7 +18,7 @@ import PauseIcon from '../../assets/images/pause.svg';
 import ForwardIcon from '../../assets/images/forward.svg';
 import RepeatIcon from '../../assets/images/repeat.svg';
 
-const Player = ({ player }) => (
+const Player = ({ player, play, pause }) => (
   <Container>
     {!!player.currentSong && <Sound url={player.currentSong.file} playStatus={player.status} />}
     <Current>
@@ -41,9 +41,15 @@ const Player = ({ player }) => (
         <button type="submit">
           <img src={BackwardIcon} alt="Backward" />
         </button>
-        <button type="submit">
-          <img src={PlayIcon} alt="Play" />
-        </button>
+        {!!player.currentSong && player.status === Sound.status.PLAYING ? (
+          <button type="submit" onClick={() => pause()}>
+            <img src={PauseIcon} alt="Pause" />
+          </button>
+        ) : (
+          <button type="submit" onClick={() => play()}>
+            <img src={PlayIcon} alt="Play" />
+          </button>
+        )}
         <button type="submit">
           <img src={ForwardIcon} alt="Forward" />
         </button>
@@ -77,6 +83,8 @@ const Player = ({ player }) => (
 );
 
 Player.propTypes = {
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
   player: PropTypes.shape({
     currentSong: PropTypes.shape({
       thumbnail: PropTypes.string,
@@ -92,7 +100,9 @@ const mapStateToProps = state => ({
   player: state.player,
 });
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(PlayerActions, dispatch);
 
-export default connect(mapStateToProps)(Player);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Player);
